@@ -1,0 +1,63 @@
+---
+# tasks file for jenkins
+
+- name: Update apt packages
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: Importing the GPG key
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    state: present
+
+- name: Add the Jenkins software repository to the source list 
+  apt_repository:
+    repo: deb https://pkg.jenkins.io/debian-stable binary/
+    state: present
+
+- name: Update apt packages
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: Install OpenJDK 8
+  apt:
+    name: openjdk-8-jdk
+    state: present
+
+- name: Install OpenJDK 11
+  apt:
+    name: openjdk-11-jdk
+    state: present
+
+- name: uninstall OpenJDK 11
+  apt:
+    name: openjdk-11-jdk
+    state: absent
+
+- name: Install Jenkins
+  apt:
+    name: jenkins   
+    state: latest
+
+- name: Start and enable jenkins
+  systemd:
+    state: started
+    enabled: true
+    name: jenkins
+
+- name: Getting the password for first login
+  shell: |
+    cat {{ jenkins_password }}
+  register: file_content
+
+- name: "Print the password to the console"
+  debug:
+    msg: "{{ file_content.stdout }}"
+
+- name: "Adding user 'jenkins' to group docker"
+  user:
+    name: jenkins
+    groups: ["docker"]
+    append: yes

@@ -1,0 +1,4 @@
+---
+# vars file for jenkins
+
+jenkins_password: /var/lib/jenkins/secrets/initialAdminPassword
