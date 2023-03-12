@@ -1,0 +1,6 @@
+---
+# tasks file for jenkins-plugins
+
+- name: Install plugin
+  jenkins_plugin:
+    name: build-pipeline-plugin

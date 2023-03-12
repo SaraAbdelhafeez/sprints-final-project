@@ -23,25 +23,7 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "jenkins"
   }
-  user_data = <<EOF
-    #!/bin/bash
-    # Install docker
-    apt-get update
-    apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -add-apt-repository \
-      "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-      $(lsb_release -cs) \
-      stable"
-    apt-get update
-    apt-get install -y docker
-    usermod -aG docker ubuntu
-
-    # Install docker-compose
-    curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-
-    chmod 777 /var/run/docker.sock
-    EOF
+  
 
 }
 
@@ -51,7 +33,7 @@ resource "aws_network_interface_sg_attachment" "jenkins_sg_attachment" {
 
   provisioner "local-exec" { 
     
-    command = "echo '[jenkins]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[docker]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu' > ./inventory "
+    command = "echo '[jenkins]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[docker]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[awscli]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu' > ./inventory "
   }
   provisioner "local-exec" { 
     
