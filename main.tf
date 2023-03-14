@@ -1,6 +1,12 @@
+module "network" {
+  source = "./network"
+}
+
 module "EkS" {
     source = "./EKS"
-    subnet_ids= var.subnet_ids
+    public1_subnet_id = module.network.public1_subnet_id
+    public2_subnet_id = module.network.public2_subnet_id
+    vpc_id = module.network.vpc_id
   
 }
 
@@ -12,6 +18,6 @@ module "ECR" {
 
 module "EC2" {
     source = "./EC2"
-    public1_subnet_id = var.public1_subnet_id
-    vpc_id = var.vpc_id
+    public1_subnet_id = module.network.public1_subnet_id
+    vpc_id = module.network.vpc_id
 }

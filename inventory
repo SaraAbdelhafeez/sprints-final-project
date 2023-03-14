@@ -1,1 +1,6 @@
-
+[jenkins]
+34.229.219.241 ansible_user=ubuntu
+[docker]
+34.229.219.241 ansible_user=ubuntu
+[awscli]
+34.229.219.241 ansible_user=ubuntu

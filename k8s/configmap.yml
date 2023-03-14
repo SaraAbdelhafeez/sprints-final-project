@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  db_root_user: root
+  db_root_password: root
+  db_mysql: BucketList
+  db_mysql_host: mysql-db-svc
