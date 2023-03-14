@@ -19,17 +19,20 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh 'kubectl apply -f k8s/mysql-pv.yml'
-                }
             }
         }
         stage('Creating mysql statefulset & its service') {
             steps {
-                sh 'kubectl apply -f k8s/statefulset.yml'
+                withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'kubectl apply -f k8s/statefulset.yml'
+                }
             }
         }
         stage('Creating flaskapp deployment & its service') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yml'
+                withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'kubectl apply -f k8s/deployment.yml'
+                }
             }
         }
         
