@@ -44,9 +44,7 @@ resource "aws_network_interface_sg_attachment" "jenkins_sg_attachment" {
     command = "ansible-playbook -i inventory --private-key ./jenkins_key.pem ./project.yml --ssh-common-args='-o StrictHostKeyChecking=no'"
   }
 
-  provisioner "remote-exec" {
-    
-  }
+ 
 
 }
 
