@@ -23,6 +23,32 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "jenkins"
   }
+  # Install kubectl
+  user_data = <<EOF
+#!/bin/bash
+
+# Download the latest release 
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# Validate the binary
+# Download the kubectl checksum file
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+# Validate the kubectl binary against the checksum file
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+
+# Install kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# Test to ensure the version you installed is up-to-date
+kubectl version --client --output=yaml    
+
+# install helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+sudo chmod 700 get_helm.sh
+./get_helm.sh
+
+EOF
   
 
 }
@@ -33,7 +59,7 @@ resource "aws_network_interface_sg_attachment" "jenkins_sg_attachment" {
 
   provisioner "local-exec" { 
     
-    command = "echo '[jenkins]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[docker]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[awscli]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu' > ./inventory "
+    command = "echo '[jenkins]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[docker]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu\n[aws]\n${aws_instance.jenkins.public_ip} ansible_user=ubuntu' > ./inventory "
   }
   provisioner "local-exec" { 
     

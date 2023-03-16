@@ -36,6 +36,16 @@ pipeline {
                 }
             }
         }
-        
+
+        stage('install nginx ingress controller & Creating ingress') {
+            steps {
+                withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
+                    sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
+                    sh 'kubectl apply -f k8s/ingress.yml'
+                    sh 'kubectl describe svc flask-app-ingress-ingress-nginx-controller | grep "LoadBalancer Ingress"'
+                }
+            }
+        }
     }
 }

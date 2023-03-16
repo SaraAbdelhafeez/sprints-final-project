@@ -1,0 +1,26 @@
+---
+# tasks file for aws
+- name: apt-get update
+  apt: update_cache=yes
+
+- name: AWS | install python-pip
+  action: apt pkg={{ item }} state=latest
+  with_items:
+  - pip
+  - python-pip
+
+- name: AWS | install awscli
+  apt: name=awscli
+
+- name: AWS | Assures dir exists
+  file: path="home/ubuntu/.aws" state=directory
+
+- name: AWS | create credentials
+  template:
+    src: credentials
+    dest: home/ubuntu/.aws/credentials
+
+- name: AWS | create config
+  template:
+    src: config
+    dest: "home/ubuntu/.aws/config"
