@@ -175,3 +175,9 @@ now you can destroy
 ```
 terraform destroy --auto-approve
 ```
+# NOTE
+
+In Jenkinsfile in [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) repo 
+uncomment the stage called 'install nginx ingress controller' after the first build, if you don't the build will fail because it can't re-install anthor ingress controller with the same name.
+
+# Thank you for this FUN project :)
