@@ -7,4 +7,6 @@ building infrastructure with terraform with all needed configuration with ansibl
 * 2 Public Subnets
 * Route Table 
 * Internet Getway
-### 
+### EKS module
+* eks
+* nodes
