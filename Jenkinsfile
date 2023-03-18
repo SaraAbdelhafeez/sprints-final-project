@@ -38,16 +38,17 @@ pipeline {
         }
 
         stage('install nginx ingress controller & Creating ingress') {
+            when {
+                withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    expression { return sh 'helm list -q' != 'flask-app-ingress'}
+                }
+            }
             steps {
                 withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                    if ( sh 'helm list -q' == 'flask-app-ingress') {
-                        sh 'echo "the controller is already exist"'
-                    }
-                    else {
-                        sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
-                        sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
-                        sh 'sleep 1m'
-                    }
+                    
+                    sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
+                    sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
+                    sh 'sleep 1m'
                     sh 'kubectl apply -f k8s/ingress.yml'
                     sh 'kubectl describe svc flask-app-ingress-ingress-nginx-controller | grep "LoadBalancer Ingress"'
                     sh 'echo "Just wait 3-5 minutes (only in the first build) untill the loadbalancer be Active"'
