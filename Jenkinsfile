@@ -45,6 +45,7 @@ pipeline {
                     sh 'sleep 1m'
                     sh 'kubectl apply -f k8s/ingress.yml'
                     sh 'kubectl describe svc flask-app-ingress-ingress-nginx-controller | grep "LoadBalancer Ingress"'
+                    sh 'echo "Just wait 3-5 minutes untill the loadbalancer be Active"'
                 }
             }
         }
