@@ -28,9 +28,10 @@ pipeline {
                 
                     expression { 
                         return 
-                        withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh 'helm list -q' 
-                        } != 'flask-app-ingress' || $BUILD_NUMBER != 1
+                        // withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        // sh 'helm list -q' 
+                        // } != 'flask-app-ingress' || $BUILD_NUMBER != 1
+                        BUILD_NUMBER != 1
                     }
                 
             }
