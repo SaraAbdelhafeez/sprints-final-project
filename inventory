@@ -1,6 +1,6 @@
 [jenkins]
-34.224.86.178 ansible_user=ubuntu
+54.146.27.79 ansible_user=ubuntu
 [docker]
-34.224.86.178 ansible_user=ubuntu
+54.146.27.79 ansible_user=ubuntu
 [aws]
-34.224.86.178 ansible_user=ubuntu
+54.146.27.79 ansible_user=ubuntu
