@@ -11,8 +11,8 @@ pipeline {
         }
         stage('build the images') {
             steps {
-                sh 'docker build -t 524041749761.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest MySQL-and-Python/FlaskApp'
-                sh 'docker build -t 524041749761.dkr.ecr.us-east-1.amazonaws.com/mysql-db:latest MySQL-and-Python/MySQL_Queries'
+                sh 'docker build -t 524041749761.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest ./MySQL-and-Python/FlaskApp'
+                sh 'docker build -t 524041749761.dkr.ecr.us-east-1.amazonaws.com/mysql-db:latest ./MySQL-and-Python/MySQL_Queries'
             }
         }
         stage('push the images') {
