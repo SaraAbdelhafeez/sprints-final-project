@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    enviroment {
-        RUN_BUILD = true
-    }
+    // enviroment {
+    //     RUN_BUILD = true
+    // }
     stages {
         stage('aws erc login') {
             steps {
