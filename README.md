@@ -114,32 +114,11 @@ __Script Path__
 ```
 Jenkinsfile
 ```
-<!-- 2. production-pipeline
 
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/second-pipeline.PNG?raw=true)
-
-Dashboard > build-pipeline > Configuration > Build Triggers
-
-check __Build after other projects are built__ option and __Projects to watch__ is build-pipeline then choose __Trigger only if build is stable__
-
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/prod-triggrs.PNG?raw=true)
-
-Dashboard > build-pipeline > Configuration > Pipeline
-
-add the [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) and its Credentials and make sure that __Branches to build__ is __main__ 
-
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/prod-repo.PNG?raw=true)
-
-__Script Path__
-```
-Jenkinsfile
-``` -->
 
 So, with every push event in sprints-final-project repo the build-pipeline will build and give you the link of the ingress controller loadbalancer to access the application with it
 
-<!-- ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline1-build1.PNG?raw=true)
 
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline2-build1.PNG?raw=true) -->
 
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/output.PNG?raw=true)
 
@@ -177,9 +156,5 @@ now you can destroy
 ```
 terraform destroy --auto-approve
 ```
-# NOTE
-
-In Jenkinsfile in [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) repo 
-uncomment the stage called 'install nginx ingress controller' after the first build, if you don't the build will fail because it can't re-install anthor ingress controller with the same name.
 
 # Thank you for this FUN project :)
