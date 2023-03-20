@@ -74,7 +74,7 @@ pipeline {
                     sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
                     sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
                 }
-                env.RUN_BUILD = false
+                ${env.RUN_BUILD} = false
             }
         }
         stage('Creating ingress') {
