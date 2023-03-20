@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    environment {
-        install = true
+    parameters {
+        booleanParam(name: 'RUN_BUILD', defaultValue: true)
     }
     stages {
         stage('aws erc login') {
@@ -63,7 +63,7 @@ pipeline {
             // }
             when {
                 expression {
-                    return env.install
+                    return params.RUN_BUILD
                 }
 
             }
@@ -74,7 +74,7 @@ pipeline {
                     sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
                     sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
                 }
-                ${env.install} = false
+                params.RUN_BUILD = false
             }
         }
         stage('Creating ingress') {
