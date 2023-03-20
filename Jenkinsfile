@@ -58,6 +58,12 @@ pipeline {
             //         }
                 
             // }
+            when {
+                expression {
+                    return $env:BUILD_NUMBER == 1
+                }
+
+            }
             steps {
                 withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                     
