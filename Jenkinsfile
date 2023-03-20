@@ -63,7 +63,7 @@ pipeline {
             // }
             when {
                 expression {
-                    ${env.BUILD_NUMBER} == 1
+                    env.BUILD_NUMBER == 1
                 }
 
             }
