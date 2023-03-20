@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        install = true
+    }
     stages {
         stage('aws erc login') {
             steps {
@@ -60,16 +63,18 @@ pipeline {
             // }
             when {
                 expression {
-                    return $env.BUILD_NUMBER == 1
+                    return env.install
                 }
 
             }
             steps {
+                
                 withCredentials([string(credentialsId: 'Access-key-ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'Secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                     
                     sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
                     sh 'helm install flask-app-ingress ingress-nginx/ingress-nginx -f k8s/values.yml'
                 }
+                env.install = false
             }
         }
         stage('Creating ingress') {
