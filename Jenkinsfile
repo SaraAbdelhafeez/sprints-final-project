@@ -60,7 +60,7 @@ pipeline {
             // }
             when {
                 expression {
-                    return $env:BUILD_NUMBER == 1
+                    return $env.BUILD_NUMBER == 1
                 }
 
             }
