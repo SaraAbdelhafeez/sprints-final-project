@@ -19,6 +19,8 @@ building infrastructure with terraform with all needed configuration with ansibl
 * ec2 
 
 __Build Infrastructure__
+
+Clone [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) Repo then: 
 ```
 terraform init
 ```
@@ -48,7 +50,7 @@ you don't need to install any plugins only the suggested pugins
 
 __Create webhook__
 
-Go to [MySQL-and-Python](https://github.com/SaraAbdelhafeez/MySQL-and-Python.git) repo (i add you as a collaborator)
+Go to [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) repo (i add you as a collaborator)
 
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/webhook-3.PNG?raw=true)
 
@@ -90,7 +92,7 @@ Add AWS Credentials as __secret text__
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/credentials.PNG?raw=true)
 
 
-__Create the Pipelines__
+__Create the Pipeline__
 
 1. build-pipeline 
 
@@ -104,15 +106,15 @@ check __GitHub hook trigger for GITScm polling__ option
 
 Dashboard > build-pipeline > Configuration > Pipeline
 
-add the [MySQL-and-Python](https://github.com/SaraAbdelhafeez/MySQL-and-Python.git) and its Credentials and make sure that __Branches to build__ is __master__ 
+add the [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final-project.git) and its Credentials and make sure that __Branches to build__ is __main__ 
 
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/build-repo.PNG?raw=true)
+![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/prod-repo.PNG?raw=true)
 
 __Script Path__
 ```
 Jenkinsfile
 ```
-2. production-pipeline
+<!-- 2. production-pipeline
 
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/second-pipeline.PNG?raw=true)
 
@@ -131,13 +133,13 @@ add the [sprints-final-project](https://github.com/SaraAbdelhafeez/sprints-final
 __Script Path__
 ```
 Jenkinsfile
-```
+``` -->
 
-So, with every push event in MySQL-and-Python repo the build-pipeline will build and after it build successfully the production-pipeline will build as well and give you the link of the ingress controller loadbalancer to access the application with it
+So, with every push event in sprints-final-project repo the build-pipeline will build and give you the link of the ingress controller loadbalancer to access the application with it
 
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline1-build1.PNG?raw=true)
+<!-- ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline1-build1.PNG?raw=true)
 
-![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline2-build1.PNG?raw=true)
+![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/pipeline2-build1.PNG?raw=true) -->
 
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/output.PNG?raw=true)
 
