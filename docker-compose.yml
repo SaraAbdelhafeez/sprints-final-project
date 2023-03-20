@@ -1,0 +1,16 @@
+services:
+  app:
+    build: ./FlaskApp
+    image: flask-app
+    depends_on:
+      - db
+    ports:
+      - "5002:5002"
+    container_name: flask-app
+
+  db:
+    build: ./MySQL_Queries
+    image: mysql-db
+    ports:
+      - "3306:3306"
+    container_name: mysql-db
