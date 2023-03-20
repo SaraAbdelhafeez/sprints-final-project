@@ -63,7 +63,7 @@ pipeline {
             // }
             when {
                 expression {
-                    return params.RUN_BUILD
+                    params.RUN_BUILD == true
                 }
 
             }
