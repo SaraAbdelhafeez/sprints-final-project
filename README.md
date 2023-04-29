@@ -58,37 +58,7 @@ __Add GitHub Token and AWS Credentials in Jenkins Dashboard__
 
 Dashboard > Manage Jenkins > Credentials > System > Global credentials (unrestricted)
 
-Add GitHub Token as __Username with password__
-* GitHub Username
-```
-SaraAbdelhafeez
-```
-* GitHub Token
-```
-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
-```
-Add AWS Credentials as __secret text__
 
-* Access key ID
-    
-    * ID
-    ```
-    Access-key-ID
-    ```
-    * Secret
-    ```
-    AKIAXUA2SQUAYH2SXYUD
-    ```
-* Secret access key
-
-    * ID 
-    ```
-    Secret-access-key
-    ```
-    * Secret
-    ```
-    bCiTptl6RqyBJ2xj61FAv36ZohUAurcJAyw0ap1c
-    ```
 ![image](https://github.com/SaraAbdelhafeez/git-task/blob/main/credentials.PNG?raw=true)
 
 
@@ -135,26 +105,7 @@ aws ecr delete-repository --repository-name flask-app --force
 ```
 aws ecr delete-repository --repository-name mysql-db --force
 ```
-
-delete the loadbalancers
-```
-aws elbv2 describe-load-balancers | grep LoadBalancerName
-```
-the output will be like this 
-```
- "LoadBalancerName": "a7c16e5c383fa46c2aa8b5ce7a389cbb",
- "LoadBalancerName": "ad63f1154590c40f5b598c8eedddba98",
-```
-copy the name of each on and run:
-```
-aws elb delete-load-balancer --load-balancer-name a7c16e5c383fa46c2aa8b5ce7a389cbb
-```
-```
-aws elb delete-load-balancer --load-balancer-name ad63f1154590c40f5b598c8eedddba98
-```
-now you can destroy
 ```
 terraform destroy --auto-approve
 ```
 
-# Thank you for this FUN project :)
